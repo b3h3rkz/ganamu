@@ -16,6 +16,6 @@ class CountryTest(TestCase):
 
     def test_country_name(self):
         ghana = Country.objects.get(name="Ghana")
-        self.assertEqual(ghana.__str__, "Ghana")
+        self.assertEqual(ghana.name, "Ghana")
 
 
