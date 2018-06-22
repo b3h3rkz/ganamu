@@ -6,12 +6,18 @@ from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from rest_framework import routers
 from country.views import CountryModelViewSet, AdminCountryModelViewSet
+from exchange.views import ExchangeModelViewSet, CoinModelViewSet, AdminCoinModelViewSet, AdminExchangeModelViewSet
 
 router = routers.DefaultRouter()
 admin_router = routers.DefaultRouter()
 
 router.register(r'countries', CountryModelViewSet)
+router.register(r'exchanges', ExchangeModelViewSet)
+router.register(r'coins', CoinModelViewSet)
+
+admin_router.register(r'exchanges', AdminExchangeModelViewSet)
 admin_router.register(r'countries', AdminCountryModelViewSet)
+admin_router.register(r'coins', AdminCoinModelViewSet)
 
 
 urlpatterns = [
