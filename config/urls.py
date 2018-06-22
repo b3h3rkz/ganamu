@@ -4,8 +4,23 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+from rest_framework import routers
+from country.views import CountryModelViewSet, AdminCountryModelViewSet
+
+router = routers.DefaultRouter()
+admin_router = routers.DefaultRouter()
+
+router.register(r'countries', CountryModelViewSet)
+admin_router.register(r'countries', AdminCountryModelViewSet)
+
 
 urlpatterns = [
+    path('admin/api/v1/', include(admin_router.urls), name="api_admin"),
+    path('api/v1/', include(router.urls), name="api"),
+    path('admin/api/v1/', include(admin_router.urls), name="api_admin"),
+
+    path(r'api-auth/', include('rest_framework.urls')),
+
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
         "about/",
